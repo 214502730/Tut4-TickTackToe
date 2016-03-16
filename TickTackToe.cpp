@@ -1,16 +1,16 @@
-#include "TicTacToe.h"
+#include "TickTackToe.h"
 #include <iostream>
 
 using namespace std;
 
 //default constructor
-TicTacToe::TicTacToe()
+TickTackToe::TicTackoe()
 {
 	
 }
 
 //clearing the board and sets all values to 0
-void TicTacToe::reset()
+void TickTackToe::reset()
 {
 	int a, b;
 	for (a = 1; a < 4; a++)
@@ -23,7 +23,7 @@ void TicTacToe::reset()
 }
 
 //determining if the players move is correct or not
-bool TicTacToe::move(int row, int col)
+bool TickTackToe::move(int row, int col)
 {
 	if (Game[row][col] == NULL)
 	{
@@ -39,10 +39,13 @@ bool TicTacToe::move(int row, int col)
 }
 
 //displaying the game board and players moves
-void TicTacToe::print(){
+void TickTackToe::print()
+{
 	int a, b;
-	for (a = 1; a < 4; a++){
-		for (b = 1; b < 4; b++){
+	for (a = 1; a < 4; a++)
+	{
+		for (b = 1; b < 4; b++)
+		{
 			if (Game[a][b] == NULL)
 				cout << "-";
 			else
@@ -52,11 +55,53 @@ void TicTacToe::print(){
 	}
 }
 
+//determines the winner of the game or if it is still in progress
+string TickTackToe::over()
+{
+	int a, b;
+	char win = NULL;
+	for (a = 1; a < 4; a++)
+	{
+		if (Game[a][0] == Game[a][1] == Game[a][0] == Game[a][2])
+		{
+			win = Game[a][0];
+		}
+
+		if (Game[0][a] == Game[1][a] == Game[0][a] == Game[2][a])
+		{
+			if (Game[0][a] != NULL)
+				win = Game[0][a];
+		}
+	}
+
+	if (win == "O")
+	{
+		return "the winner is player 1";
+	}
+	else if (win == "x")
+	{
+		return "the winner is player 2";
+	}
+
+
+	//determining if there is an empty field in the grid 
+	for (a = 0; a < 3; a++)
+	{
+		for (b = 0; b < 3; b++)
+		{
+			if (Game(a, b)==NULL)
+				return "the game is not finished yet";
+		}
+	}
+	return "There is no winner, game is a draw";
+}
+
+
 
 
 
 //default destructor
-TicTacToe::~TicTacToe()
+TickTackToe::~TickTackToe()
 {
 }
 
