@@ -9,7 +9,7 @@ TicTacToe::TicTacToe()
 	
 }
 
-//clears the board and sets all values to 0
+//clearing the board and sets all values to 0
 void TicTacToe::reset()
 {
 	int a, b;
@@ -17,15 +17,15 @@ void TicTacToe::reset()
 	{
 		for (b = 1; b < 4; b++)
 		{
-			Board[i][j] = NULL;
+			Game[a][b] = NULL;
 		}
 	}
 }
 
-//determines if the players move is correct or not
+//determining if the players move is correct or not
 bool TicTacToe::move(int row, int col)
 {
-	if (Board[row][col] == NULL)
+	if (Game[row][col] == NULL)
 	{
 		if (row < 4 && row > 0 && col < 4 && col > 0)
 		{
@@ -37,6 +37,21 @@ bool TicTacToe::move(int row, int col)
 	  return false;
 	}
 }
+
+//displaying the game board and players moves
+void TicTacToe::print(){
+	int a, b;
+	for (a = 1; a < 4; a++){
+		for (b = 1; b < 4; b++){
+			if (Game[a][b] == NULL)
+				cout << "-";
+			else
+				cout << Game[a][b] << "  ";
+		}
+		cout << endl;
+	}
+}
+
 
 
 
