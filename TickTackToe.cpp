@@ -56,7 +56,7 @@ void TickTackToe::print()
 }
 
 //determines the winner of the game or if it is still in progress
-string TickTackToe::over()
+int TickTackToe::over()
 {
 	int a, b;
 	char win = NULL;
@@ -76,11 +76,11 @@ string TickTackToe::over()
 
 	if (win == "O")
 	{
-		return "the winner is player 1";
+		return 1;
 	}
 	else if (win == "x")
 	{
-		return "the winner is player 2";
+		return 2;
 	}
 
 
@@ -90,10 +90,10 @@ string TickTackToe::over()
 		for (b = 0; b < 3; b++)
 		{
 			if (Game(a, b)==NULL)
-				return "the game is not finished yet";
+				return 3;
 		}
 	}
-	return "There is no winner, game is a draw";
+	
 }
 
 
@@ -108,5 +108,58 @@ TickTackToe::~TickTackToe()
 
 int main()
 {
+
+	TickTackToe obj;
+	bool finished = false; // determines if the game is complete
+	int row, col;
+	int Play = 1; //keeps track of which players turn it is 
+	while (!finished) 
+	{
+		cout << "Player " << Play << " please enter the row" << endl;
+		cin >> row;
+		cout << " please enter column" << endl;
+		cin>> col;
+
+		//determining if move is valid
+		if (obj.move(row, col)) 
+		{
+			if (Play == 1) 
+			{
+				Game[row][col] = '0';
+				Play = 2;	
+			}
+			else 
+			{
+				Game[row][col] = 'X';
+				Play = 1;
+			}
+		}
+		else 
+		{
+			cout << "invalid move please try again"<< endl;
+		}
+
+		//displaying the game board
+		cout << "Game board:" << endl;
+		obj.print(); 
+
+		//determining if there is a winner or the game is still in progress
+		int decision = obj.over();
+		if (decision == 1) {
+			cout << "the winner is player 1" << endl;
+			obj.reset();
+		}
+		else if (decision == 2)
+		{
+			cout << "the winner is player 2" << endl;
+			obj.reset();
+		}
+
+		else if (decision == 3 )
+		{
+			cout << "the game is not finished yet" << endl;
+		}
+	}
+
 
 }
